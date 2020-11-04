@@ -1,0 +1,68 @@
+#react-component-root {
+    height: 100vh;
+    width: 100vw;
+}
+
+.header {
+    border: 1px solid var(--color-grey);
+    padding: 16px;
+}
+
+.brand,
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.brand {
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.brand > h1 {
+    margin: 0;
+}
+
+.menu {
+    justify-content: flex-end;
+}
+
+.menu > a {
+    font-size: var(--font-size-l);
+    margin-right: 8px;
+}
+
+.menu-collapse {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-collapse .items {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-collapse .items > a {
+    margin: 4px 0;
+}
+
+/* Portrait and Landscape */
+@media only screen and (max-width: 812px) {
+    .brand > .text,
+    .brand > h1 {
+        flex: 0.5;
+    }
+
+    .brand > .text.large {
+        font-size: var(--font-size-m);
+        text-align: right;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-collapse {
+        display: block;
+    }
+}

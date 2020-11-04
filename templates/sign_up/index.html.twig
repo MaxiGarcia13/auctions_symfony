@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign up - 💸 Auctions!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/form.css">
+{% endblock %}
+
+{% block body %}
+    <main class="login-wrapper">
+        <form class="card" method="post">
+
+            <h1> Welcome to 💸 Auctions! </h1>
+            <h2 class="hint-message left">Please sign in</h2>
+
+            <div class="formController">
+                <label class="label" for="inputDisplayName">Display name</label>
+                <input
+                    type="text"
+                    name="displayName"
+                    placeholder="My name and last name"
+                    id="inputDisplayName"
+                    class="input"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <div class="formController">
+                <label class="label" for="inputEmail">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="example@auctions.com"
+                    id="inputEmail"
+                    class="input"
+                    required
+                >
+            </div>
+
+            <div class="formController">
+                <label class="label" for="inputPassword">Password</label>
+                <input
+                    class="input"
+                    type="password"
+                    name="password"
+                    id="inputPassword"
+                    placeholder="My password"
+                    required
+                >
+            </div>
+
+            <input
+                type="hidden"
+                name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            {% if error %}
+                <div class="alert danger">
+                    🚨 An error has ocurred
+                </div>
+            {% endif %}
+
+            <button class="button primary" type="submit">
+                Sign up
+            </button>
+
+            <span class="hint-message">
+                I have an account, <a href="/signIn"> sign in</a>
+            </span>
+        </form>
+    </main>
+{% endblock %}

@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: var(--font-size-xxl);
+    margin: 16px 0px;
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+    margin: 0px;
+}
+
+.button {
+    width: 100%;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    border: unset;
+    cursor: pointer;
+    border: 2px solid var(--color-accent);
+}
+
+.button.primary {
+    background: var(--color-accent);
+    color: var(--color-secondary);
+}
+
+.button:hover {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.alert {
+    font-weight: 600;
+    font-size: var(--font-size-m);
+}
+
+.alert.danger {
+    color: var(--color-error);
+}
+
+.card {
+    background: var(--backgroud-primary);
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.hint-message {
+    font-size: var(--font-size-m);
+    color: var(--color-primary);
+}
+
+.hint-message.right,
+.hint-message.left,
+.hint-message.center {
+    width: 100%;
+}
+
+.hint-message.center {
+    text-align: center;
+}
+
+.hint-message.right {
+    text-align: right;
+}
+
+.hint-message.left {
+    text-align: left;
+}
+
+h2.hint-message {
+    font-size: var(--font-size-xl);
+    color: var(--color-grey);
+}
+
+.text {
+    font-size: var(--font-size-m);
+}
+
+.text.large {
+    font-size: var(--font-size-l);
+}

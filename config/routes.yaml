@@ -1,0 +1,19 @@
+index:
+   path: /
+   controller: App\Controller\HomeController::index
+
+myAuctions:
+   path: /myAuctions
+   controller: App\Controller\HomeController::index
+
+createAccount:
+   path: /createAuctions
+   controller: App\Controller\HomeController::index
+
+signIn:
+   path: /signIn
+   controller: App\Controller\SecurityController::index
+
+signUp:
+   path: /signUp
+   controller: App\Controller\SignUpController::index

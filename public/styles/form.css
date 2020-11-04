@@ -1,0 +1,58 @@
+.formController {
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formController > .label {
+    font-size: var(--font-size-m);
+    margin-bottom: 4px;
+}
+
+.formController > .input {
+    background: var(--backgroud-secodnary);
+    padding: 8px;
+    padding-bottom: 8px;
+    border: 1px solid var(--backgroud-secodnary);
+    outline-color: var(--color-accent);
+    border-radius: var(--border-radius);
+}
+
+.formController > .label,
+.formController > .input {
+    font-size: var(--font-size-m);
+    color: var(--color-primary);
+}
+
+.formController:hover > .label {
+    color: var(--color-accent);
+}
+
+.formController:hover > .input {
+    border: 1px solid var(--color-accent);
+}
+
+.formController.error {
+    outline-color: var(--color-error) !important;
+}
+
+.formController.error > .label,
+.formController.error > .input {
+    color: var(--color-error);
+}
+
+.formController.error > .input {
+    border: 1px solid var(--color-error);
+}
+
+.formController > .label.checkbox {
+    display: flex;
+    justify-items: center;
+    align-items: flex-start;
+}
+
+.formController > .label.checkbox input[type='checkbox'] {
+    margin: 0;
+    margin-right: 4px;
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div
+        data-logged-user="{{app.user.username}}"
+        data-path-log-out="{{path('app_logout')}}"
+        id="react-component-root"
+    ></div>
+{% endblock %}
+
+{% block javascripts %}
+     {{encore_entry_script_tags('app') }}
+{% endblock %}

@@ -1,0 +1,17 @@
+:root {
+    --font-size-m: 12px;
+    --font-size-l: 15px;
+    --font-size-xl: 18px;
+    --font-size-xxl: 24px;
+
+    --color-primary: #210521;
+    --color-secondary: #fcfcfc;
+    --color-grey: #afafaf;
+    --color-accent: #f06648;
+    --color-error: #b10033;
+
+    --backgroud-primary: #fcfcfc;
+    --backgroud-secodnary: #eeeeee;
+
+    --border-radius: 4px;
+}

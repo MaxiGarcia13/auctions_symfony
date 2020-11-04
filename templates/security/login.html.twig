@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign in - 💸 Auctions!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/form.css">
+{% endblock %}
+
+{% block body %}
+    <main class="login-wrapper">
+        <form class="card" method="post">
+
+            <h1> Welcome to 💸 Auctions! </h1>
+            <h2 class="hint-message left">Please sign in</h2>
+
+            <div class="formController {{ error ? 'error' : '' }}">
+                <label class="label" for="inputEmail">Email</label>
+                <input
+                    type="email"
+                    value="{{ last_username }}"
+                    name="email"
+                    placeholder="example@auctions.com"
+                    id="inputEmail"
+                    class="input"
+                    required
+                    autofocus
+                >
+            </div>
+
+            <div class="formController">
+                <label class="label" for="inputPassword">Password</label>
+                <input
+                    class="input"
+                    type="password"
+                    name="password"
+                    id="inputPassword"
+                    placeholder="My password"
+                    required
+                >
+            </div>
+
+            {% if error %}
+                <div class="alert danger">
+                    🚨 {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <input
+                type="hidden"
+                name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            <input
+                type="hidden"
+                name="_target_path"
+                value="{{path('app_home')}}"
+            />
+
+<!--
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+-->
+
+                <div class="formController">
+                    <label for class="label checkbox">
+                        <input
+                            id="remember_me"
+                            name="_remember_me"
+                            type="checkbox"
+                            class="checkbox"
+                        >
+                         Remember me
+                    </label>
+                </div>
+
+
+
+            <button class="button primary" type="submit">
+                Sign in
+            </button>
+
+            <span class="hint-message">
+                you don't have account?, <a href="/signUp"> sign up</a>
+            </span>
+        </form>
+    </main>
+{% endblock %}
