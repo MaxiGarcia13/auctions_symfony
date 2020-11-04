@@ -1,6 +1,9 @@
 #react-component-root {
     height: 100vh;
     width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
 }
 
 .header {
@@ -44,6 +47,10 @@
 
 .menu-collapse .items > a {
     margin: 4px 0;
+}
+
+.brand > .text.large {
+    margin-right: 8px;
 }
 
 /* Portrait and Landscape */

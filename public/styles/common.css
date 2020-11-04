@@ -2,6 +2,7 @@ body {
     margin: 0;
     display: flex;
     font-family: 'Montserrat', sans-serif;
+    background-color: var(--backgroud-secodnary);
 }
 
 h1 {
@@ -32,6 +33,10 @@ h2 {
     border: 2px solid var(--color-primary);
     color: var(--color-primary);
     font-weight: 600;
+}
+
+.button.loading {
+    cursor: progress;
 }
 
 .alert {
@@ -83,4 +88,8 @@ h2.hint-message {
 
 .text.large {
     font-size: var(--font-size-l);
+}
+
+.flex {
+    display: flex;
 }

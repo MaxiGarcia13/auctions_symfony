@@ -1,5 +1,8 @@
 import React, {useEffect, useMemo} from 'react';
-import Header from './components/Header'
+import Header from './components/Header';
+import AuctionManagment from './components/AuctionManagment';
+import AuctionsList from './components/AuctionsList';
+import BidsList from './components/BidsList';
 import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -10,6 +13,7 @@ const store = configureStore();
 const element =  document.getElementById('react-component-root');
 
 const AppComonent = ()=> {
+
     const loggedUser = useMemo(()=> element.dataset['loggedUser']);
     const signInPath = useMemo(()=> element.dataset['pathLogOut']);
 
@@ -18,14 +22,17 @@ const AppComonent = ()=> {
             <Router>
                 <Header loggedUser={loggedUser} signInPath={signInPath}/>
                 <Switch>
-                    <Route path="/myAuctions">
-                        My Auctions...
+                    <Route path="/myBids">
+                        <BidsList />
                     </Route>
                     <Route path="/createAuctions">
-                        Create Auctions...
+                        <AuctionManagment />
+                    </Route>
+                    <Route path="/auctions/:id">
+                        <AuctionManagment />
                     </Route>
                     <Route path="/" >
-                        Auctions...
+                        <AuctionsList />
                     </Route>
                 </Switch>
             </Router>

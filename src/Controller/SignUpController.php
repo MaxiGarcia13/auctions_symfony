@@ -27,6 +27,7 @@ class SignUpController extends AbstractController
             $password = $request->get('password', null);
             $displayName = $request->get('displayName', null);
             $roles = ['USER'];
+            // $roles = ['ADMINISTRATOR'];
 
             $user = new User();
 

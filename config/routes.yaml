@@ -2,12 +2,20 @@ index:
    path: /
    controller: App\Controller\HomeController::index
 
-myAuctions:
-   path: /myAuctions
+myBids:
+   path: /myBids
    controller: App\Controller\HomeController::index
 
-createAccount:
+createAuctions:
    path: /createAuctions
+   controller: App\Controller\HomeController::index
+
+auctionWithParameter:
+   path: /auctions/{id}
+   controller: App\Controller\HomeController::index
+
+bidsWithParameter:
+   path: /bids/{id}
    controller: App\Controller\HomeController::index
 
 signIn:

@@ -1,0 +1,78 @@
+.listMainWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+.listWrapper {
+    padding: 10px;
+}
+
+.filterWrapper,
+.listWrapper,
+.listWrapper > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.listWrapper > span {
+    flex: 1;
+}
+
+.filterWrapper {
+    padding: 16px;
+    padding-top: 32px;
+}
+
+.filterWrapper > input {
+    width: 300px;
+    padding: 8px;
+}
+
+.filterWrapper > button {
+    height: 35px;
+    width: 35px;
+}
+
+.listWrapper .card {
+    width: 230px !important;
+    height: auto;
+    min-height: 160px;
+    margin: 16px;
+    cursor: pointer;
+}
+
+.listWrapper .card:active,
+.listWrapper .card:hover {
+    border: 1px solid var(--color-accent);
+    transform: scale(1.1);
+    transition: transform 200ms;
+}
+
+.listItem > .imageWrapper > img {
+    width: 100%;
+}
+
+.listItem > .itemDescription > p {
+    font-size: var(--font-size-m);
+    max-height: 24px;
+    overflow: hidden;
+}
+
+.listItem > .itemDescription:hover > p {
+    max-height: unset;
+}
+
+.listItem > .itemDescription > h3 {
+    font-size: var(--font-size-l);
+}
+
+/* Portrait and Landscape */
+@media only screen and (max-width: 812px) {
+    .listWrapper .card {
+        width: 70% !important;
+        height: auto;
+    }
+}

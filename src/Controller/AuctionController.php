@@ -14,11 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AuctionController extends AbstractController
 {
     /**
-     * @Route("/auction/create", name="create_auction")
+     * @Route("/auction", name="create_auction")
      *
      * @return void
      */
-    public function createAuction(Request $request, EntityManagerInterface $em)
+    public function createAuction(Request $request, AuctionRepository $auctionRepository, EntityManagerInterface $em)
     {
 
         $response = new JsonResponse();
@@ -28,48 +28,72 @@ class AuctionController extends AbstractController
             return $response;
         }
 
-        $data = json_decode($request->getContent(), true);
+        switch ($request->getMethod()) {
+            case 'POST':
+                $data = json_decode($request->getContent(), true);
 
-        $name = $data['name'];
-        $desciption = $data['desciption'];
-        $picture = $data['picture'];
-        $initialValue = $data['initial_value'];
+                try {
+                    $auction = new Auction();
 
-        if ('POST' === $request->getMethod()) {
+                    $auction->setName($data['name']);
+                    $auction->setDescription($data['description']);
+                    $auction->setPicture($data['picture']);
+                    $auction->setInitialValue($data['initial_value']);
+                    $auction->setLastBid($data['initial_value']);
+                    $auction->setCreated(new DateTime());
 
-            try {
-                $auction = new Auction();
+                    $em->persist($auction);
+                    $em->flush();
 
-                $auction->setName($name);
-                $auction->setDescription($desciption);
-                $auction->setPicture($picture);
-                $auction->setInitialValue($initialValue);
-                $auction->setCreated(new DateTime());
-
-                $em->persist($auction);
-                $em->flush();
-
-                $response->setData([
-                    'success' => true,
-                    'data' => [
-                        [
+                    $response->setData([
+                        'success' => true,
+                        'data' => [
                             'id' => $auction->getId(),
                             'name' => $auction->getName(),
                             'description' => $auction->getDescription(),
                             'picture' => $auction->getPicture(),
                             'initial_value' => $auction->getInitialValue(),
+                            'last_bid' => $auction->getLastBid(),
                             'created' => $auction->getCreated()
                         ]
-                    ]
-                ]);
-            } catch (\Throwable $th) {
+                    ]);
+                } catch (\Throwable $th) {
+                    $response->setData([
+                        'success' => false
+                    ]);
+                    $response->setStatusCode(500);
+                }
+
+                break;
+
+            default:
+
+                $queryName = $request->get('name', null);
+
+
+                $auctions = $auctionRepository->findAll();
+
+                $auctionsArray = [];
+
+                foreach ($auctions as $auction) {
+                    if (!$queryName || strpos($auction->getName(), $queryName)) {
+                        $auctionsArray[] = [
+                            'id' => $auction->getId(),
+                            'name' => $auction->getName(),
+                            'description' => $auction->getDescription(),
+                            'picture' => $auction->getPicture(),
+                            'initial_value' => $auction->getInitialValue(),
+                            'last_bid' => $auction->getLastBid(),
+                            'created' => $auction->getCreated()
+                        ];
+                    }
+                }
+
                 $response->setData([
-                    'success' => false
+                    'success' => true,
+                    'data' => $auctionsArray
                 ]);
-                $response->setStatusCode(500);
-            }
-        } else {
-            $response->setStatusCode(400);
+                break;
         }
 
         return $response;
@@ -80,7 +104,7 @@ class AuctionController extends AbstractController
      *
      * @return void
      */
-    public function auctionManagment($id, Request $request, AuctionRepository $auctionRepository, EntityManagerInterface $em)
+    public function auctionManagmentById($id, Request $request, AuctionRepository $auctionRepository, EntityManagerInterface $em)
     {
 
         $response = new JsonResponse();
@@ -93,13 +117,27 @@ class AuctionController extends AbstractController
         $auction = $auctionRepository->find($id);
 
         switch ($request->getMethod()) {
+            case 'GET':
+                $response->setData([
+                    'success' => true,
+                    'data' => [
+                        'id' => $auction->getId(),
+                        'name' => $auction->getName(),
+                        'description' => $auction->getDescription(),
+                        'picture' => $auction->getPicture(),
+                        'initial_value' => $auction->getInitialValue(),
+                        'created' => $auction->getCreated(),
+                        'last_bid' => $auction->getLastBid(),
+                    ]
+                ]);
+                break;
             case 'PUT':
                 try {
 
                     $data = json_decode($request->getContent(), true);
 
                     $auction->setName($data['name']);
-                    $auction->setDescription($data['desciption']);
+                    $auction->setDescription($data['description']);
                     $auction->setPicture($data['picture']);
                     $auction->setInitialValue($data['initial_value']);
 
@@ -109,14 +147,13 @@ class AuctionController extends AbstractController
                     $response->setData([
                         'success' => true,
                         'data' => [
-                            [
-                                'id' => $auction->getId(),
-                                'name' => $auction->getName(),
-                                'description' => $auction->getDescription(),
-                                'picture' => $auction->getPicture(),
-                                'initial_value' => $auction->getInitialValue(),
-                                'created' => $auction->getCreated()
-                            ]
+                            'id' => $auction->getId(),
+                            'name' => $auction->getName(),
+                            'description' => $auction->getDescription(),
+                            'picture' => $auction->getPicture(),
+                            'initial_value' => $auction->getInitialValue(),
+                            'last_bid' => $auction->getLastBid(),
+                            'created' => $auction->getCreated()
                         ]
                     ]);
                 } catch (\Throwable $th) {
@@ -128,8 +165,18 @@ class AuctionController extends AbstractController
                 break;
 
             case 'DELETE':
-                $em->remove($auction);
-                $em->flush();
+                try {
+                    $em->remove($auction);
+                    $em->flush();
+                    $response->setData([
+                        'success' => true
+                    ]);
+                } catch (\Throwable $th) {
+                    $response->setData([
+                        'success' => false
+                    ]);
+                    $response->setStatusCode(500);
+                }
                 break;
 
             default:

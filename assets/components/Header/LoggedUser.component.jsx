@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { useGetApi } from '../../hooks/useGetApi';
+import { useApi } from '../../hooks/useApi';
 import { useDispatch } from 'react-redux';
 import { setLoggedUser } from '../../actions/loggedUser';
 
 const LoggedUserComponent = ({ email }) => {
-    const { isLoading, data, execute, error } = useGetApi();
+    const { isLoading, data, execute, error } = useApi();
     const dispatch = useDispatch();
 
     useEffect(() => {

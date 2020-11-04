@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,6 +40,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $displayName;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bit::class, mappedBy="user")
+     */
+    private $bits;
+
+    public function __construct()
+    {
+        $this->bits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +137,36 @@ class User implements UserInterface
     public function setDisplayName(string $displayName): self
     {
         $this->displayName = $displayName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bit[]
+     */
+    public function getBits(): Collection
+    {
+        return $this->bits;
+    }
+
+    public function addBit(Bit $bit): self
+    {
+        if (!$this->bits->contains($bit)) {
+            $this->bits[] = $bit;
+            $bit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBit(Bit $bit): self
+    {
+        if ($this->bits->removeElement($bit)) {
+            // set the owning side to null (unless already changed)
+            if ($bit->getUser() === $this) {
+                $bit->setUser(null);
+            }
+        }
 
         return $this;
     }

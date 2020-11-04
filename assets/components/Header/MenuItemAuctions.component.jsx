@@ -14,7 +14,7 @@ const MenuItemAuctions = () => {
         }
     }, [loggedUser]);
 
-    return isAdmin ? <Link to='/createAuctions'> Create auctions </Link> : null;
+    return isAdmin ? <Link to='/createAuctions'> Create auctions </Link> : <Link to='/myBids'>My bids</Link>;
 };
 
 export default memo(MenuItemAuctions);

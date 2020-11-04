@@ -1,0 +1,28 @@
+.formMainWrapper,
+.form-card .imageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-card {
+    max-width: 400px;
+    width: 60%;
+}
+
+.form-card .imageWrapper {
+    margin-bottom: 16px;
+}
+
+.form-card .imageWrapper .image {
+    width: 200px;
+}
+
+.form-card h2 {
+    margin-bottom: 16px;
+}
+
+.delete-button {
+    margin-right: 8px;
+    width: unset;
+}
