@@ -7,7 +7,6 @@ const MenuComponent = ({ signInPath }) => {
         () => (
             <>
                 <Link to='/'>Auctions</Link>
-                <Link to='/myAuctions'>My auctions</Link>
                 <MenuItemAuctions />
                 <a href={signInPath}>Sign out</a>
             </>

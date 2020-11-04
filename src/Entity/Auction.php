@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AuctionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Auction
      * @ORM\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $last_bid;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bit::class, mappedBy="auction")
+     */
+    private $bits;
+
+    public function __construct()
+    {
+        $this->bits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +120,48 @@ class Auction
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    public function getLastBid(): ?float
+    {
+        return $this->last_bid;
+    }
+
+    public function setLastBid(float $last_bid): self
+    {
+        $this->last_bid = $last_bid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bit[]
+     */
+    public function getBits(): Collection
+    {
+        return $this->bits;
+    }
+
+    public function addBit(Bit $bit): self
+    {
+        if (!$this->bits->contains($bit)) {
+            $this->bits[] = $bit;
+            $bit->setAuction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBit(Bit $bit): self
+    {
+        if ($this->bits->removeElement($bit)) {
+            // set the owning side to null (unless already changed)
+            if ($bit->getAuction() === $this) {
+                $bit->setAuction(null);
+            }
+        }
 
         return $this;
     }

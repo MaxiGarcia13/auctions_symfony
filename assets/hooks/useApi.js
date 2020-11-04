@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export const getApi = async (url, options) => {
+export const fetchApi = async (url, options) => {
     const response = await fetch(url, options);
 
     if(response.status === 403) window.location.href = "signOut";
@@ -10,7 +10,7 @@ export const getApi = async (url, options) => {
     return data;
 };
 
-export const useGetApi = () => {
+export const useApi = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [data, setData] = useState({});
@@ -18,11 +18,14 @@ export const useGetApi = () => {
     const execute = async (url, options = {}) => {
         try {
             setIsLoading(true);
-            const {data, success} = await getApi(url, options);
+            setError(null);
+
+            const {data, success} = await fetchApi(url, options);
 
             if(!success) {
                 throw new Error('ERROR')
             }
+
             setData(data);
             setIsLoading(false);
             return data;
