@@ -13,13 +13,14 @@ const BidsListComponent = () => {
 
     const loggedUser = useSelector(loggedUserSelector);
 
-    const getBits = useCallback(() => execute(`${url}/${loggedUser.id}`, {}), [execute]);
+    const getBits = useCallback(() => loggedUser.id && execute(`${url}/${loggedUser.id}`, {}), [
+        execute,
+        loggedUser.id,
+    ]);
 
     useEffect(() => {
-        if (loggedUser.id) {
-            getBits();
-        }
-    }, [getBits, loggedUser.id]);
+        getBits();
+    }, [getBits]);
 
     return (
         <main className='listMainWrapper'>
