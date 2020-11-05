@@ -1,7 +1,14 @@
 import { useState, useCallback } from 'react';
 
 export const fetchApi = async (url, options) => {
-    const response = await fetch(url, options);
+
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+            ...options.headers,
+        },
+        ...options
+    });
 
     if(response.status === 403) window.location.href = "signOut";
 

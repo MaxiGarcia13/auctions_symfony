@@ -5,7 +5,7 @@
 Por default se crean los usuarios con perfil No administrador.
 Para cambiar esto en src/Controller/SignUpController.php linea 29 o 30;
 
-Usuarios creados:
+### Usuarios creados:
 
 Administrador: usr: maxitrc813@gmail.com pwr:123456;
 Usuario: usr: maxig8@hotmail.com pwr:123456;
@@ -29,6 +29,11 @@ Usuario: usr: maxig8@hotmail.com pwr:123456;
 
 ## 👨🏼‍💻 Levantar entornos
 
+### Instalar las dependencias
+
+-   composer install
+-   yarn install
+
 ### symfony server:start
 
 Run the server in the development mode.
@@ -38,3 +43,11 @@ Run the server in the development mode.
 Run the webpack in the development mode.
 
 ## 🐋 Docker
+
+### 1 - docker-compose build
+
+### 2 - docker-composer up -d
+
+### Enter -> http://localhost:8000
+
+# 💅🏻🍕💼
