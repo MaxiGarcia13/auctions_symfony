@@ -43,3 +43,7 @@ Run the server in the development mode.
 Run the webpack in the development mode.
 
 ## 🐋 Docker
+
+### docker-composer up -d
+
+Create a containers and up the containers
