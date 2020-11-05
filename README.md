@@ -47,3 +47,5 @@ Run the webpack in the development mode.
 ### docker-composer up -d
 
 Create a containers and up the containers
+
+🚨 Falta de terminar de configurar Docker
