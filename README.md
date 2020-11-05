@@ -44,8 +44,10 @@ Run the webpack in the development mode.
 
 ## 🐋 Docker
 
-### docker-composer up -d
+### 1 - docker-compose build
 
-Create a containers and up the containers
+### 2 - docker-composer up -d
 
-🚨 Falta de terminar de configurar Docker
+### Enter -> http://localhost:8000
+
+# 💅🏻🍕💼
